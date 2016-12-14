@@ -1,0 +1,34 @@
+{
+  "scenelist" : [
+{
+    "spirit": "Hello. I am your spirit guardian. BTW there is a shadow beast charging at you. I advise you to run.",
+    "scenario": "You turn back to find a creature you never seen before.",
+    "choice": ["1. Stand your ground and fight bare handed.", "2. Run away from the shadow beast.", "3. Stand and do nothing. I accept my miserable fate.", "4. Sprint towards the beast."]
+}, {
+  
+    "spirit": ["You fool! You have no weapons to fight those things! Escape immediately!", "Run! There's a castle ahead. Seek shelter there!", "Why are you not running?! You’ll die!", "What are you doing?! Run in the opposite direction!"],
+    "choice": null,
+    "scenario": ["You raise your fists and get into a fighting position. The beasts are now within a yard radius and you punch your fist into the face of one of the beasts. Your fist goes right through the beast and the beast seems unfazed by your attack. You then feel sharp painful sensations throughout your body. The beasts’ fangs dig deeper into your flesh, rendering you unable to move. You lose all energy and the beasts proceed to dine on your body. Congrats on becoming dinner.", "You immediately sprint away from the beasts and run as fast as possible. As you run, you can feel your energy sapping away quickly. Then, you seem a large structure ahead which you conclude it to be a castle.", "You feel sharp painful sensations throughout your body. The beasts’ fangs dig deeper into your flesh, rendering you unable to move. You lose all energy and the beasts proceed to dine on your body. Congrats on becoming dinner."]
+}, {
+    "spirit": "You’re almost there! Hang in there!",
+    "scenario": "You force your body to endure the strain and push your body to its physical limits. You get to the door and start banging on the door.",
+    "choice": null
+}, {
+    "spirit": ["You are safe now. Look behind you.", "Great job on surviving. Now, let’s formally introduce each other. I am your spirit guardian, Iamus, and it is a pleasure to meet you for the first time. What is your name?"],
+    "scenario": ["You turn your head ", "Your heart races rapidly and you drop to the ground. Your eyes remain on the beast but you notice there is an invisible wall between you and the beast.", "Iamus flies towards in front of you and you first notice Iamus’s shimmering silver hair. You then suddenly feel a slight ringing in your ears. Before you can realize what’s going on, the ringing fades away quickly."],
+    "choice": null
+}, {
+    "spirit": "I see. What a wonderful name. Now, shall we proceed into the castle? I will go search the area. Will be back in a jiffy.",
+    "scenario": "Before you can ask any questions, Iamus flies off to the top of the castle. You turn towards the door. The castle is a classic gothic styled structure that looks like Dracula’s castle. ",
+    "choice": ["1. Look at the beast", "2. Look around for a key or doorbell", "3. Slide the door ", "4. Slam into the door"]
+}, {
+    "spirit": null,
+    "scenario": ["The beast glares at you, watching your every movement", "No such thing seems to be around. Your search returns nothing.", "The door slides open. There is just darkness in front of you. You can’t see anything beyond the door.", "The door doesn’t budge at all."],
+    "choice": null
+}, {
+    "spirit": null,
+    "choice": ["1. Step into the darkness", "2. Wait outside for Iamus", "3. Search the door and area for clues", "4. Take a nap by the doorway"],
+    "scenario": ["You step in and a chilly sensation comes over you. You keep walking and with each step, you can’t help feeling someone is watching you. You then feel a poke on your head.", "You decide to wait. You feel a tap on your shoulder and you turn around. As you turn around, you feel hands grabbing you. You look back at the door and see black shadowy hands out of the darkness. You are then pulled into the dark.","You decide to take a nap. You then feel a tap on your shoulder and you turn around. As you turn around, you feel hands grabbing you. You look back at the door and see black shadowy hands out of the darkness. You are then pulled into the dark.","You decide to wait. You feel a tap on your shoulder and you turn around. As you turn around, you feel hands grabbing you. You look back at the door and see black shadowy hands out of the darkness. You are then pulled into the dark."]
+  }
+]
+}
