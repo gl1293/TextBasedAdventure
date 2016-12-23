@@ -1,124 +1,122 @@
-var player = [];
-var death = false;
-var imgPop = false;
-var proceed = false;
 var font;
 var img;
 var data;
+var dramamusic;
 var currentSceneNumber;
 var currentScene;
 var chosenNumber;
 var x;
 var y;
-var input;
+var margin;
+var check;
+var startImage = -100;
 
 function preload() {
   font = loadFont("HARNGTON.TTF");
   img = loadImage("shadowBeast.jpg");
   data = loadJSON("storyData.json");
+  beastMusic = loadSound('tyops.wav'); //when beast is chasing you (scene 1 - 3)
+  suspenseMusic = loadSound('kaiodeleis.wav'); //when door is opened
 }
 
-//////////////////////////////
 function setup() {
   createCanvas(600, 600);
-  background(0);
-  textAlign(LEFT);
   textFont(font);
   textSize(15);
-  currentSceneNumber = 0;
-  currentScene = data.scenelist[currentSceneNumber];
-  chosenNumber = 0;
+  margin = width - 50;
   x = 20;
   y = 100;
+  chosenNumber = 0;
+  currentSceneNumber = 0;
+  currentScene = data.scenelist[currentSceneNumber];
 }
 
 function draw() {
   background(0);
-  proceed = false;
-  while (currentSceneNumber < data.scenelist.length) {
-    if (currentScene.spirit !== null && currentScene.spirit instanceof Array)
-      fill(255),
-      text(currentScene.spirit[chosenNumber], x, y);
-    else if (currentScene.spirit !== null && currentScene.spirit instanceof String)
-      fill(255),
-      text(currentScene.spirit, x, y);
-    console.log(currentScene.spirit);
-
-    if (currentScene.scenario instanceof Array)
-      fill(255),
-      text(currentScene.scenario[chosenNumber], x, y + 20);
-    else
-      fill(255),
-      text(currentScene.scenario, x, y + 20);
-
-    if (currentScene.choice !== null)
-      fill(255),
-      text("PICK YOUR CHOICE", x, y + 40),
-      text(currentScene.choice[0], x, y + 60),
-      text(currentScene.choice[1], x, y + 80),
-      text(currentScene.choice[2], x, y + 100),
-      text(currentScene.choice[3], x, y + 120);
-    else
-      fill(255),
-      text("Please press the spacebar to proceed.", x, y + 40);
-    
-    keyTyped();
-    if (proceed === true) currentSceneNumber += 1, proceed = true;
-
-    console.log(proceed);
-  }
-}
-//////////////////////////////
-/*function specialCase() {
-  imgPop = true;
-  if (imgPop === true) {
-    background(img);
-    if (frameCount % 50 === 0) { //cheap timer. make better one.
-      imgPop = false,
-        background(0),
-        fill(255),
-        text(currentScene.scenario[2], x, y),
-        fill('#faa'),
-        text(currentScene.scenario[2], x, y + 20),
-        fill(255),
-        text(currentScene.scenario[3], x, y + 40),
-        text("Please press the spacebar to proceed.", x, y + 60);
-    }
-  }
-}
-
-///////////////////////////////
-// function player() {
-//  input = createInput();
-//  input.changed(name)
-//}
-
-
-
-    if (currentSceneNumber == 4) {
-    text(currentScene.spirit[1], x, y),
-      text(currentScene.scenario[1], x, y + 20);
+  currentScene = data.scenelist[currentSceneNumber];
+  check = (currentScene.scenario[chosenNumber].search("GAME OVER"));
+  story();
+  music();
+  // Choice "Look for beast" reveals image
+  if (currentSceneNumber == 5 && chosenNumber === 0) {
     if (frameCount % 50 === 0) {
-      specialCase();
+      startImage = frameCount;
+      beast();
     }
-  } 
-  put this part at the top of the draw function and change if statements to else if
-  */
+  }
+}
 
-///////////////////////////////
+function story() {
+
+  // SPIRIT
+  if (currentScene.spirit !== null && currentScene.spirit instanceof Array)
+    fill(200, 200, 250),
+    text(currentScene.spirit[chosenNumber], x, y, margin);
+  if (currentScene.spirit !== null && typeof currentScene.spirit == "string")
+    fill(200, 200, 250),
+    text(currentScene.spirit, x, y, margin);
+
+  //SCENARIO
+  if (currentScene.scenario instanceof Array)
+    fill(255),
+    text(currentScene.scenario[chosenNumber], x, y + 60, margin);
+  else
+    fill(255),
+    text(currentScene.scenario, x, y + 60, margin);
+
+
+  // CHOICE
+  if (currentScene.choice !== null)
+    fill(255),
+    text("PICK YOUR CHOICE. PRESS YOUR NUMBER", x, y + 140),
+    text(currentScene.choice[0], x, y + 160, margin),
+    text(currentScene.choice[1], x, y + 180, margin),
+    text(currentScene.choice[2], x, y + 200, margin),
+    text(currentScene.choice[3], x, y + 220, margin);
+
+  // INSTRUCTIONS
+  if (check != -1 || currentSceneNumber == data.scenelist.length - 1)
+    fill(255),
+    text("Please press the spacebar to restart the game. ", x, height - 30);
+  else if (check == -1 && currentScene.choice === null)
+    fill(255),
+    text("Please press Enter to proceed.", x, height - 30);
+}
+
+function music() {
+  if (currentSceneNumber == 5 && chosenNumber == 2) suspenseMusic.play();
+  else if (currentSceneNumber < 3) beastMusic.play();
+  else beastMusic.stop();
+}
+
 function keyTyped() {
   if (keyCode == '32') //spacebar
-    proceed = true;
+    currentSceneNumber = 0;
+
+  if (keyCode == '13') { //enter
+    if (currentSceneNumber == 5 && chosenNumber != 2) currentSceneNumber -= 1;
+    else currentSceneNumber += 1;
+  }
+
   if (key == '1')
-    chosenNumber = 1,
-    proceed = true;
+    currentSceneNumber += 1,
+    chosenNumber = 0;
   if (key == '2')
-    chosenNumber = 2,
-    proceed = true;
+    currentSceneNumber += 1,
+    chosenNumber = 1;
   if (key == '3')
-    chosenNumber = 3,
-    proceed = true;
+    currentSceneNumber += 1,
+    chosenNumber = 2;
   if (key == '4')
-    chosenNumber = 4,
-    proceed = true;
+    currentSceneNumber += 1,
+    chosenNumber = 3;
+}
+
+function beast() {
+  if (frameCount - startImage < 50) {
+    image(img, 0, 0, width, height);
+  } else if (frameCount - startImage < 100) {
+    tint(255, 255 - 10 * (frameCount - startImage - 10));
+    image(img, 0, 0, width, height);
+  }
 }
